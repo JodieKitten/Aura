@@ -4,10 +4,18 @@
 #include "Player/AuraPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/EnemyInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true;
+}
+
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	APlayerController::PlayerTick(DeltaTime);
+
+	CursorTrace();
 }
 
 void AAuraPlayerController::BeginPlay()
@@ -56,5 +64,57 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 	{
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+	}
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+
+	if (!CursorHit.bBlockingHit)
+		return;
+
+	// Last frame actor = this frame actor
+	LastActor = ThisActor;
+	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
+
+	/*
+	* Line trace from cursor will have several scenarios:
+	* 
+	* A. LastActor is null && ThisActor is valid
+	*	- Highlight ThisActor
+	* 
+	* B. LastActor is null && ThisActor is null
+	*	- Do nothing
+	* 
+	* C. LastActor is valid && ThisActor is null
+	*	- Unhighlight LastActor
+	* 
+	* D. LastActor && ThisActor are valid, but not the same actor
+	*	- Unhighlight LastActor and highlight ThisActor
+	* 
+	* E. LastActor && ThisActor are valid, and are the same actor
+	*	- Do nothing
+	*/
+
+	if (!LastActor)
+	{
+		if (ThisActor)
+		{
+			ThisActor->HighlightActor();
+		}
+	}
+	else //Actor in the last frame is valid
+	{
+		if (!ThisActor)
+		{
+			LastActor->UnHighlightActor();
+		}
+		else if((ThisActor && LastActor) && ThisActor != LastActor)
+		{
+			LastActor->UnHighlightActor();
+			ThisActor->HighlightActor();
+		}
 	}
 }
