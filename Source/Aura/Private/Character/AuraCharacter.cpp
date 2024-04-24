@@ -21,7 +21,6 @@ AAuraCharacter::AAuraCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	//FRotator RotationRate = FRotator(0.0f, 400.f, 0.0f);
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.f, 0.0f);
 	GetCharacterMovement()->bConstrainToPlane = true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
