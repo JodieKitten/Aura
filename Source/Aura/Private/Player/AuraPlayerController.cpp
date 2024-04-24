@@ -2,7 +2,7 @@
 
 
 #include "Player/AuraPlayerController.h"
-
+#include <EnhancedInputSubsystems.h>
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -17,7 +17,7 @@ void AAuraPlayerController::BeginPlay()
 	// if fails, game will crash, unlike with if check
 	check(AuraContext);
 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = UlocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer);
+	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	check(Subsystem);
 
 	Subsystem->AddMappingContext(AuraContext, 0);
