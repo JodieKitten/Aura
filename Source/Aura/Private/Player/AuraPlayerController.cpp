@@ -13,7 +13,7 @@ AAuraPlayerController::AAuraPlayerController()
 
 void AAuraPlayerController::PlayerTick(float DeltaTime)
 {
-	APlayerController::PlayerTick(DeltaTime);
+	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
 }
@@ -42,7 +42,7 @@ void AAuraPlayerController::BeginPlay()
 
 void AAuraPlayerController::SetupInputComponent()
 {
-	APlayerController::SetupInputComponent();
+	Super::SetupInputComponent();
 
 	// will crash if the castchecked fails
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
