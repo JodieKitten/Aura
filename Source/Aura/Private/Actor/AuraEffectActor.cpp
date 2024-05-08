@@ -30,11 +30,11 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	// Make a context handle
 	FGameplayEffectContextHandle EffectContextHandle = TargetASC->MakeEffectContext();
 
-	// Add target of effect
+	// Add target of effect (us)
 	EffectContextHandle.AddSourceObject(this);
 
 	// Create the spec handle, passing in the class, level (dw atm), and the above handle
-	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.0f, EffectContextHandle);
+	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 
 	// Apply to effect using the data from the above spec handle
 	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
