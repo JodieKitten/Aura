@@ -32,4 +32,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	virtual void InitAbilityActorInfo() {};
 };

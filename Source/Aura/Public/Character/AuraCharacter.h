@@ -34,6 +34,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = Camera)
 	UCameraComponent* Camera;
 
-	void InitAbilityActorInfo();
+	virtual void InitAbilityActorInfo() override;
 
 };
