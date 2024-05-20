@@ -24,6 +24,7 @@ public:
 
 	virtual void OnRep_PlayerState() override;
 
+	virtual int32 GetPlayerLevel() override;
 protected:
 
 
