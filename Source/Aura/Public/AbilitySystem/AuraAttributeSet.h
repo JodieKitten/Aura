@@ -47,6 +47,10 @@ struct FEffectProperties
 	UPROPERTY()
 	UAbilitySystemComponent* TargetASC = nullptr;
 };
+
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr;
+
 /**
  * 
  */
@@ -64,9 +68,7 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
-	// FGameplayAttribute(*)() is the below simplified
-	// TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr (a function pointer)
-	TMap<FGameplayTag, FGameplayAttribute(*)()> TagsToAttributes;
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
 
 	/*
 	* Primary Attributes
