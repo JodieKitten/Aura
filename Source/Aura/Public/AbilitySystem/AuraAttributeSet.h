@@ -64,6 +64,10 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
+	// FGameplayAttribute(*)() is the below simplified
+	// TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr (a function pointer)
+	TMap<FGameplayTag, FGameplayAttribute(*)()> TagsToAttributes;
+
 	/*
 	* Primary Attributes
 	*/
