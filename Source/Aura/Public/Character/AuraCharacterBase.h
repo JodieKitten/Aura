@@ -55,7 +55,6 @@ protected:
 
 	void AddCharacterAbilities();
 
-
 	virtual FVector GetCombatSocketLocation() override { return Weapon->GetSocketLocation(WeaponTipSocketName); }
 
 private:
