@@ -10,6 +10,8 @@
  * 
  */
 class AAuraProjectile;
+class USoundBase;
+class UGameplayEffect;
 
 UCLASS()
 class AURA_API UAuraProjectileSpell : public UAuraGameplayAbility
@@ -27,4 +29,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Aura Projectile Spell")
 	TSubclassOf<AAuraProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
+
 };

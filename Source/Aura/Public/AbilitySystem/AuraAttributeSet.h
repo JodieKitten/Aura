@@ -193,8 +193,17 @@ public:
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
 
+	/*
+	* Meta Attributes	
+	* - Are not replicated and are set on the server,
+	* so the server processes the data and changes any of the replicated attributes
+	*/
+
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
+
 private:
-
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
-
+	void ShowFloatingText(const FEffectProperties& Props, float Damage) const;
 };
