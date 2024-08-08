@@ -29,7 +29,7 @@ public:
 	static void InitializeDefaultAttributes(const UObject* WorldContextObject, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC);
 
 	UFUNCTION(BlueprintCallable, Category = "Aura Ability System Library | Character Class Defaults")
-	static void GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
+	static void GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC, ECharacterClass CharacterClass);
 
 	UFUNCTION(BlueprintCallable, Category = "Aura Ability System Library | Character Class Defaults")
 	static UCharacterClassInfo* GetCharacterClassInfo(const UObject* WorldContextObject);
@@ -45,4 +45,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Aura Ability System Library | Gameplay Effects")
 	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit);
+
+	UFUNCTION(BlueprintCallable, Category = "Aura Ability System Library | Gameplay Mechanics")
+	static void GetLivePlayersWithinRadius(
+		const UObject* WorldContextObject,
+		TArray<AActor*>& OutOverlappingActors,
+		const TArray<AActor*>& ActorsToIgnore,
+		float Radius,
+		const FVector& SphereOrigin);
+
+	UFUNCTION(BlueprintPure, Category = "Aura Ability System Library | Gameplay Mechanics")
+	static bool IsNotFriend(AActor* FirstActor, AActor* SecondActor);
 };

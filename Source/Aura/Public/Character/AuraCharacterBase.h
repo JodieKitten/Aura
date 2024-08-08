@@ -26,12 +26,20 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; }
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
-	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; }
-
+	/* Combat Interface */
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual bool IsDead_Implementation() const override { return bDead; };
+	virtual AActor* GetAvatar_Implementation() override { return this; };
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; };
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override { return AttackMontages; };
 	virtual void Die() override;
+	/* end Combat Interface */
 
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	TArray<FTaggedMontage> AttackMontages;
 
 protected:
 	virtual void BeginPlay() override;
@@ -41,6 +49,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	FName WeaponTipSocketName;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName LeftHandSocketName;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName RightHandSocketName;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -64,7 +78,7 @@ protected:
 
 	void AddCharacterAbilities();
 
-	virtual FVector GetCombatSocketLocation() override { return Weapon->GetSocketLocation(WeaponTipSocketName); }
+	bool bDead = false;
 
 	/* Dissolve Effects */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dissolve Material")
@@ -80,6 +94,7 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+	/* end Dissolve Effects */
 
 private:
 
