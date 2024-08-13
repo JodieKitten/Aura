@@ -147,10 +147,6 @@ void UAuraAbilitySystemLibrary::GetLivePlayersWithinRadius(
 			if (Overlap.GetActor()->Implements<UCombatInterface>() && !ICombatInterface::Execute_IsDead(Overlap.GetActor()))
 			{
 				OutOverlappingActors.AddUnique(Overlap.GetActor());
-
-				// temp fix to stop enemy attacking dead player, but attacks other enemies and still attacks dead player when all players dead
-				if (ICombatInterface::Execute_IsDead(Overlap.GetActor()))
-					continue;
 			}
 		}
 	}

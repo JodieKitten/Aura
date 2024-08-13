@@ -14,6 +14,7 @@ class UGameplayEffect;
 class UGameplayAbility;
 class UAnimMontage;
 class UMaterialInstance;
+class UNiagaraSystem;
 
 UCLASS(Abstract)
 class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
@@ -32,6 +33,7 @@ public:
 	virtual AActor* GetAvatar_Implementation() override { return this; };
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; };
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override { return AttackMontages; };
+	virtual UNiagaraSystem* GetBloodEffect_Implementation() override { return BloodEffect; };
 	virtual void Die() override;
 	/* end Combat Interface */
 
@@ -44,7 +46,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
@@ -78,6 +80,7 @@ protected:
 
 	void AddCharacterAbilities();
 
+	UPROPERTY(BlueprintReadOnly)
 	bool bDead = false;
 
 	/* Dissolve Effects */
@@ -96,6 +99,9 @@ protected:
 	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
 	/* end Dissolve Effects */
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UNiagaraSystem* BloodEffect;
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = Abilities)
@@ -103,4 +109,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<UAnimMontage> HitReactMontage;
+
+
 };
