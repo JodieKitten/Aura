@@ -120,23 +120,48 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_Physical);
 
 	/*
-	* Montage
+	* Combat Sockets
 	*/
-	GameplayTags.Montage_Attack_Weapon = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Montage.Attack.Weapon"), FString("Weapon attack"));
+	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("CombatSocket.Weapon"), FString("Weapon Combat Socket"));
 
-	GameplayTags.Montage_Attack_LeftHand = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Montage.Attack.LeftHand"), FString("Left Handed attack"));
+	GameplayTags.CombatSocket_LeftHand = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("CombatSocket.LeftHand"), FString("Left Hand Combat Socket"));
 
-	GameplayTags.Montage_Attack_RightHand = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Montage.Attack.RightHand"), FString("Right Handed attack"));
+	GameplayTags.CombatSocket_RightHand = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("CombatSocket.RightHand"), FString("Right Hand Combat Socket"));
+
+	GameplayTags.CombatSocket_Tail = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("CombatSocket.Tail"), FString("Tail Combat Socket"));
 
 	/*
-	* Misc Tags
+	* Montage
 	*/
-	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().
-	AddNativeGameplayTag(FName("Effects.HitReact"), FString("Tag granted on hit react"));
+	GameplayTags.Montage_Attack_1 = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Montage.Attack.1"), FString("Attack montage 1"));
 
+	GameplayTags.Montage_Attack_2 = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Montage.Attack.2"), FString("Attack montage 2"));
+
+	GameplayTags.Montage_Attack_3 = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Montage.Attack.3"), FString("Attack montage 3"));
+
+	GameplayTags.Montage_Attack_4 = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Montage.Attack.4"), FString("Attack montage 4"));
+
+
+	/*
+	* Abilites
+	*/
 	GameplayTags.Abilites_Attack = UGameplayTagsManager::Get().
 		AddNativeGameplayTag(FName("Abilites.Attack"), FString("Attack ability tag"));
+
+	GameplayTags.Abilities_Summon = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Abilites.Summon"), FString("Summon ability tag"));
+
+	/*
+	* Hit React
+	*/
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Effects.HitReact"), FString("Tag granted on hit react"));
 }

@@ -28,12 +28,15 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	/* Combat Interface */
-	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual bool IsDead_Implementation() const override { return bDead; };
 	virtual AActor* GetAvatar_Implementation() override { return this; };
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; };
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override { return AttackMontages; };
 	virtual UNiagaraSystem* GetBloodEffect_Implementation() override { return BloodEffect; };
+	virtual int32 GetMinionCount_Implementation() override { return MinionCount; };
+	virtual void IncrementMinionCount_Implementation(int32 Amount) override { MinionCount += Amount; };
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
 	virtual void Die() override;
 	/* end Combat Interface */
 
@@ -57,6 +60,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	FName RightHandSocketName;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	FName TailSocketName;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -83,6 +89,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	bool bDead = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
+	USoundBase* DeathSound;
+
 	/* Dissolve Effects */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dissolve Material")
 	TObjectPtr<UMaterialInstance> DissolveMaterialInstance;
@@ -101,6 +110,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UNiagaraSystem* BloodEffect;
+
+	/*
+	* Minions
+	*/
+	int32 MinionCount = 0.0f;
 
 private:
 
