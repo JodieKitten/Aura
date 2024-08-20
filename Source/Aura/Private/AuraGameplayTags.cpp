@@ -159,6 +159,9 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Summon = UGameplayTagsManager::Get().
 		AddNativeGameplayTag(FName("Abilites.Summon"), FString("Summon ability tag"));
 
+	GameplayTags.Abilities_Fire_Firebolt = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Abilites.Fire.Firebolt"), FString("Firebolt ability tag"));
+
 	/*
 	* Hit React
 	*/
