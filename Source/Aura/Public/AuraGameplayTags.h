@@ -39,6 +39,8 @@ public:
 	FGameplayTag Attributes_Resistance_Arcane;
 	FGameplayTag Attributes_Resistance_Physical;
 
+	FGameplayTag Attributes_Meta_IncomingXP;
+
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_1;
@@ -52,10 +54,12 @@ public:
 	FGameplayTag Damage_Arcane;
 	FGameplayTag Damage_Physical;
 
-	FGameplayTag Abilites_Attack;
+	FGameplayTag Abilities_Attack;
 	FGameplayTag Abilities_Summon;
 
 	FGameplayTag Abilities_Fire_Firebolt;
+
+	FGameplayTag Cooldown_Fire_Firebolt;
 
 	FGameplayTag CombatSocket_Weapon;
 	FGameplayTag CombatSocket_RightHand;
@@ -70,8 +74,6 @@ public:
 	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
 
 	FGameplayTag Effects_HitReact;
-protected:
-
 
 private:
 	static FAuraGameplayTags GameplayTags;

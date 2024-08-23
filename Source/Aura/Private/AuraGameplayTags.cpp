@@ -57,6 +57,12 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		AddNativeGameplayTag(FName("Attributes.Secondary.MaxMana"), FString("Maximum amount of Mana"));
 
 	/*
+	* Meta Attribute Tags
+	*/
+	GameplayTags.Attributes_Meta_IncomingXP = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Attributes.Meta.IncomingXP"), FString("Incoming XP"));
+
+	/*
 	* Input Tags
 	*/
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().
@@ -153,14 +159,20 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	/*
 	* Abilites
 	*/
-	GameplayTags.Abilites_Attack = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Abilites.Attack"), FString("Attack ability tag"));
+	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Abilities.Attack"), FString("Attack ability tag"));
 
 	GameplayTags.Abilities_Summon = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Abilites.Summon"), FString("Summon ability tag"));
+		AddNativeGameplayTag(FName("Abilities.Summon"), FString("Summon ability tag"));
 
 	GameplayTags.Abilities_Fire_Firebolt = UGameplayTagsManager::Get().
-		AddNativeGameplayTag(FName("Abilites.Fire.Firebolt"), FString("Firebolt ability tag"));
+		AddNativeGameplayTag(FName("Abilities.Fire.Firebolt"), FString("Firebolt ability tag"));
+
+	/*
+	* Cooldowns
+	*/
+	GameplayTags.Cooldown_Fire_Firebolt = UGameplayTagsManager::Get().
+		AddNativeGameplayTag(FName("Cooldown.Fire.Firebolt"), FString("Firebolt cooldown tag"));
 
 	/*
 	* Hit React

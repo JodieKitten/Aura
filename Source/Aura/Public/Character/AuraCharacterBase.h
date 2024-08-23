@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
 #include "Interaction/CombatInterface.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "AuraCharacterBase.generated.h"
 
 class UAbilitySystemComponent;
@@ -28,13 +29,15 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	/* Combat Interface */
-	virtual bool IsDead_Implementation() const override { return bDead; };
-	virtual AActor* GetAvatar_Implementation() override { return this; };
-	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; };
-	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override { return AttackMontages; };
-	virtual UNiagaraSystem* GetBloodEffect_Implementation() override { return BloodEffect; };
-	virtual int32 GetMinionCount_Implementation() override { return MinionCount; };
-	virtual void IncrementMinionCount_Implementation(int32 Amount) override { MinionCount += Amount; };
+	virtual bool IsDead_Implementation() const override { return bDead; }
+	virtual AActor* GetAvatar_Implementation() override { return this; }
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override { return HitReactMontage; }
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override { return AttackMontages; }
+	virtual UNiagaraSystem* GetBloodEffect_Implementation() override { return BloodEffect; }
+	virtual int32 GetMinionCount_Implementation() override { return MinionCount; }
+	virtual void IncrementMinionCount_Implementation(int32 Amount) override { MinionCount += Amount; }
+	virtual ECharacterClass GetCharacterClass_Implementation() override { return CharacterClass; }
+
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
 	virtual void Die() override;
@@ -48,6 +51,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	ECharacterClass CharacterClass = ECharacterClass::Warrior;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat)
 	TObjectPtr<USkeletalMeshComponent> Weapon;
@@ -120,6 +126,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Abilities)
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	UPROPERTY(EditAnywhere, Category = Abilities)
+	TArray<TSubclassOf<UGameplayAbility>> StartupPassiveAbilities;
+
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	TObjectPtr<UAnimMontage> HitReactMontage;
